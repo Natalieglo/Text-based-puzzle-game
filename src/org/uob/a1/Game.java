@@ -295,12 +295,16 @@ public class Game
                 {
                     String itemName = command[1];
 
-                    if (currentRoom.getItem() != null && currentRoom.getItem().equalsIgnoreCase(itemName))
+                   if ("IDCard".equalsIgnoreCase(itemName) && "Gym".equalsIgnoreCase(currentRoom.getName()) && player.getInventory().hasItem("GymKey") == -1)
+                    {
+                        System.out.println("The LOCKER is locked. You need a Gym Key to open it.");
+                    }
+                    else if (currentRoom.getItem() != null && currentRoom.getItem().equalsIgnoreCase(itemName))
                     {
                         player.getInventory().addItem(currentRoom.getItem(), currentRoom.getItemDescription());
                         System.out.println(itemName + " now in inventory");
-                        currentRoom.removeItem();  
-                        player.getScore().collectItem(); 
+                        currentRoom.removeItem();
+                        player.getScore().collectItem();
                     }
                     else
                     {
