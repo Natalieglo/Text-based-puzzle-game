@@ -236,37 +236,79 @@ public class Game
                 if (command.length >1)
                 {
                     String target = command[1];
-                    if (target.equalsIgnoreCase(currentRoom.getFeature())) 
+
+                    if (currentRoom.getFeature() != null && target.equalsIgnoreCase(currentRoom.getFeature()))
                     {
                         System.out.println(currentRoom.getFeatureDescription());
+
+                        //MOVED INSIDE LOOK CASE TO HAVE IT ONLY PRINT INSIDE INSTEAD OF EVERY TIME YOU RUN A COMMAND
+                        if ("Locker".equalsIgnoreCase(currentRoom.getFeature()) && player.getInventory().hasItem("IDCard") == -1)
+                        {
+                            if (player.getInventory().hasItem("GymKey") != -1)
+                            {
+                                System.out.println("You use the Gym Key to open the LOCKER. Inside you find the ID Card!");
+                                player.getInventory().addItem("IDCard", "The ID CARD needed to open the MAIN DOOR");
+                                currentRoom.removeFeature();
+                                player.getScore().collectItem();
+                            }
+                            else
+                            {
+                                System.out.println("The LOCKER is locked. You need a key.");
+                            }
+                        }
+
+                        
+                        if ("MainDoor".equalsIgnoreCase(currentRoom.getFeature()))
+                        {
+                            if (player.getInventory().hasItem("IDCard") != -1)
+                            {
+                                System.out.println("You use the ID Card to open the MAIN DOOR and you have escaped!!");
+                                isRunning = false;
+                            }
+                            else
+                            {
+                                System.out.println("The MAIN DOOR is locked. You need an ID Card.");
+                            }
+                        }
                     }
-                    else if (player.getInventory().hasItem(target) != -1) {
+                    else if (currentRoom.getItem() != null && target.equalsIgnoreCase(currentRoom.getItem()))
+                    {
+                        System.out.println(currentRoom.getItemDescription());
+                    }
+                    else if (player.getInventory().hasItem(target) != -1)
+                    {
                         System.out.println(player.getInventory().getItemDescription(target));
                     }
-                    else 
+                    else
                     {
                         System.out.println("You don't see that here.");
                     }
-                } 
-                else 
+                }
+                else
                 {
                     System.out.println(currentRoom.getDescription());
                 }
                 break;
                 
             case "take":
-                if (command.length > 1) {
+                if (command.length > 1)
+                {
                     String itemName = command[1];
 
-                    if (currentRoom.getItem() != null && currentRoom.getItem().equalsIgnoreCase(itemName)) {
+                    if (currentRoom.getItem() != null && currentRoom.getItem().equalsIgnoreCase(itemName))
+                    {
                         player.getInventory().addItem(currentRoom.getItem(), currentRoom.getItemDescription());
                         System.out.println(itemName + " now in inventory");
                         currentRoom.removeItem();  
                         player.getScore().collectItem(); 
-                    } else {
+                    }
+                    else
+                    {
                         System.out.println("There is no " + itemName + " here.");
                     }
-                } else {
+                }
+                else
+                {
                     System.out.println("Specify an item to take.");
                 }
                 break;
@@ -276,8 +318,7 @@ public class Game
                 System.out.println("Not a valid command. Try again.");
                 break;
             }
-
-            
+/*/
             if ("Locker".equalsIgnoreCase(currentRoom.getFeature()) && player.getInventory().hasItem("IDCard") == -1) 
             {
                 if (player.getInventory().hasItem("GymKey")!=-1) 
@@ -304,7 +345,7 @@ public class Game
                 }
             }
 
-        
+        */
             
         }
         scanner.close();
