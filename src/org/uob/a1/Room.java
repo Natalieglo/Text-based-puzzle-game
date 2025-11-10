@@ -1,5 +1,6 @@
 package org.uob.a1;
 
+
 //FINISHED
 
 // Task 2 - Room.java
@@ -14,13 +15,22 @@ public class Room
     private String description;
     private char symbol;  // The symbol is used when displaying the room on the map.
     private Position position;
+    private String item;
+    private String itemDescription;
+    private String feature;       
+    private String featureDescription;
 
-    public Room(String name,String Description,char symbol,Position position)
+
+    public Room(String name,String description,char symbol,Position position, String item, String itemDescription, String feature, String featureDescription)
     {
         this.name=name;
-        this.description=Description;
+        this.description = description;
         this.symbol=symbol;
         this.position=position;
+        this.item = item;
+        this.itemDescription = itemDescription;
+        this.feature = feature;
+        this.featureDescription = featureDescription;
     }
 
     public String getName() 
@@ -43,5 +53,31 @@ public class Room
     {
         return position;
     }
-    
+
+    public String getItem()
+    {
+        return item;
+
+    }
+    public String getItemDescription()
+    {
+        return itemDescription;
+    }
+    public String getFeature() 
+    { 
+        return feature; 
+    }
+
+    public void removeFeature() {
+        this.feature = null;
+        this.featureDescription = null;
+    }   
+    public String getFeatureDescription() 
+    { 
+        return featureDescription; 
+    }
+    public void removeItem() {
+        this.item = null;
+        this.itemDescription = null;
+    }
 }

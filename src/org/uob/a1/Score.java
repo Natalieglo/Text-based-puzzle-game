@@ -17,7 +17,7 @@ public class Score {
 
     public Score(int startingScore)
     {
-        this.startingScore=startingScore;
+        this.startingScore= startingScore;
         this.currentScore=startingScore;
         this.roomsVisited=0;
         this.puzzlesSolved=0;
@@ -39,4 +39,10 @@ public class Score {
         return currentScore;
         
     }
+    public void collectItem()
+    {
+        puzzlesSolved++;
+        currentScore += PUZZLE_VALUE;
+    }
+
 }
