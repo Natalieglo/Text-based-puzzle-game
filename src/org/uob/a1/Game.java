@@ -253,7 +253,7 @@ public class Game
                             }
                             else
                             {
-                                System.out.println("The LOCKER is locked. You need a key.");
+                                //System.out.println("The LOCKER is locked. You need a key.");
                             }
                         }
 
@@ -267,7 +267,7 @@ public class Game
                             }
                             else
                             {
-                                System.out.println("The MAIN DOOR is locked. You need an ID Card.");
+                                //System.out.println("The MAIN DOOR is locked. You need an ID Card.");
                             }
                         }
                     }
