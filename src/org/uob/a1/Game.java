@@ -238,11 +238,13 @@ public class Game
                     String target = command[1];
 
                     if (currentRoom.getFeature() != null && target.equalsIgnoreCase(currentRoom.getFeature()))
+                    //checking room for the features and that its not nothing
                     {
                         System.out.println(currentRoom.getFeatureDescription());
 
                         //MOVED INSIDE LOOK CASE TO HAVE IT ONLY PRINT INSIDE INSTEAD OF EVERY TIME YOU RUN A COMMAND
                         if ("Locker".equalsIgnoreCase(currentRoom.getFeature()) && player.getInventory().hasItem("IDCard") == -1)
+                        //if the locker is checked in the room and the player has the gymkey then:
                         {
                             if (player.getInventory().hasItem("GymKey") != -1)
                             {
@@ -259,6 +261,7 @@ public class Game
 
                         
                         if ("MainDoor".equalsIgnoreCase(currentRoom.getFeature()))
+                        //if the main door is checked in the room and the player has the idcard then escape
                         {
                             if (player.getInventory().hasItem("IDCard") != -1)
                             {
@@ -273,10 +276,12 @@ public class Game
                     }
                     else if (currentRoom.getItem() != null && target.equalsIgnoreCase(currentRoom.getItem()))
                     {
+                        //item looked at and then returned
                         System.out.println(currentRoom.getItemDescription());
                     }
                     else if (player.getInventory().hasItem(target) != -1)
                     {
+                        //if already in inv. then descript. shown
                         System.out.println(player.getInventory().getItemDescription(target));
                     }
                     else
@@ -286,6 +291,7 @@ public class Game
                 }
                 else
                 {
+                    //just look typed then desricpt. shown
                     System.out.println(currentRoom.getDescription());
                 }
                 break;
@@ -294,17 +300,19 @@ public class Game
                 if (command.length > 1)
                 {
                     String itemName = command[1];
-
+                    //if the player trys to take the idcard when it doesnt have the gymkey then error
                    if ("IDCard".equalsIgnoreCase(itemName) && "Gym".equalsIgnoreCase(currentRoom.getName()) && player.getInventory().hasItem("GymKey") == -1)
                     {
                         System.out.println("The LOCKER is locked. You need a Gym Key to open it.");
                     }
                     else if (currentRoom.getItem() != null && currentRoom.getItem().equalsIgnoreCase(itemName))
+                    //otherwise checks if item in the room then added to inv.
+                    
                     {
                         player.getInventory().addItem(currentRoom.getItem(), currentRoom.getItemDescription());
                         System.out.println(itemName + " now in inventory");
-                        currentRoom.removeItem();
-                        player.getScore().collectItem();
+                        currentRoom.removeItem();//removed item from r00m 
+                        player.getScore().collectItem();//++score
                     }
                     else
                     {
@@ -313,6 +321,7 @@ public class Game
                 }
                 else
                 {
+                    //nothing after take is entered
                     System.out.println("Specify an item to take.");
                 }
                 break;
